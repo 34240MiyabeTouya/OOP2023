@@ -19,9 +19,15 @@ namespace WindowsFormsApp1 {
             //tbAns.Text = ans.ToString();
             int num1 = int.Parse(tbNum1.Text);
             int num2 = int.Parse(tbNum1.Text);
-            int sum = num1 +num2;
+            int sum = num1 + num2;
             tbAns.Text = sum.ToString();
 
+        }
+        private void button2_Click(object sender, EventArgs e) {
+            double result = Math.Pow((double)nud1.Value, (double)nud2.Value);
+            tbans2.Text = result.ToString();
+            //一行で書く場合
+            //tbans2.Text = (Math.Pow((double)nud1.Value, (double)nud2.Value)).ToString();
         }
     }
 }
