@@ -6,49 +6,41 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BallApp {
-    class SoccerBall {
-        //フィールド
-        private Image image; //画像データ
-
-        private double posX; //x座標
-        private double posY; //y座標
+    class SoccerBall : Obj{
 
         private double moveX;  //移動量（x方向）
         private double moveY;  //移動量（y方向）
-
-        Random rand = new Random();　//乱数インスタンス
+        Random rand = new Random(); //乱数インスタンス
 
         //コンストラクタ
-        public SoccerBall(double xp,double yp) {
-            Image = Image.FromFile(@"pic\soccer_ball.png");
-            posX = xp;
-            posY = yp;
+        public SoccerBall(double xp,double yp)
+            :base(xp,yp, @"pic\soccer_ball.png") {
+          
 
             int radX = rand.Next(-15, 15);
-            moveX = (radX != 0 ? radX : 1); //乱数で移動量を設定
+            MoveX = (radX != 0 ? radX : 1); //乱数で移動量を設定
 
             int radY = rand.Next(-15, 15);
-            moveY = (radY != 0 ? radY : 1); //乱数で移動量を設定
-
+            MoveY = (radY != 0 ? radY : 1); //乱数で移動量を設定
         }
-        //プロパティ
-        public double PosX { get => posX; set => posX = value; }
-        public double PosY { get => posY; set => posY = value; }
-        public Image Image { get => image; set => image = value; }
+
+        public double MoveX { get => moveX; set => moveX = value; }
+        public double MoveY { get => moveY; set => moveY = value; }
 
         //メソッド
-        public void Move() {
+        public override　void Move() {
 
-            if (posX >= 700 || PosX < 0)
+            if (PosX >= 700 || PosX < 0)
             {
-                moveX = -moveX;
+                MoveX = -MoveX;
             }
-            if (posY >= 500 || PosY < 0)
+            if (PosY >= 500 || PosY < 0)
             {
-                moveY = -moveY;
+                MoveY = -MoveY;
             }
-            PosX += moveX;
-            PosY += moveY;
+            PosX += MoveX;
+            PosY += MoveY;
         }
+
     }
 }
