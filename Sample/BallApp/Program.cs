@@ -24,18 +24,19 @@ namespace BallApp {
         public Program() {
             Size = new Size(800, 600);
             this.BackColor = Color.Green;
-            this.Text = "Ballgame";
             this.MouseClick += Program_MouseClick;
-
             moveTimer = new Timer();
             moveTimer.Interval = 1; //タイマーのインターバル（ms）
             moveTimer.Tick += MoveTimer_Tick;　//デリゲート登録
         }
-
+            int count = 0;
         //マウスクリック時のイベントハンドラ
         private void Program_MouseClick(object sender, MouseEventArgs e) {
             //ボールインスタンス生成
             soccerBall = new SoccerBall(e.X-25,e.Y-25);
+            count++;
+            this.Text = count.ToString();
+
             pb = new PictureBox();
             pb.Image = soccerBall.Image;
             pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY); //画像の位置
