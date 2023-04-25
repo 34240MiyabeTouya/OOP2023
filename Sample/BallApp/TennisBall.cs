@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BallApp {
-    class SoccerBall : Obj{
+    class TennisBall : Obj {
 
         //フィールド
         Random rand = new Random(); //乱数インスタンス
 
-        //コンストラクタ
-        public SoccerBall(double xp,double yp):base(xp,yp, @"pic\soccer_ball.png") {
+        public TennisBall(double xp, double yp) : base(xp, yp, @"pic\tennis_ball.png") {
 
             int radX = rand.Next(-15, 15);
             MoveX = (radX != 0 ? radX : 1); //乱数で移動量を設定
@@ -20,8 +18,6 @@ namespace BallApp {
             int radY = rand.Next(-15, 15);
             MoveY = (radY != 0 ? radY : 1); //乱数で移動量を設定
         }
-
-       
 
         //メソッド
         public override void Move() {
