@@ -11,9 +11,11 @@ namespace BallApp {
 
         private Timer moveTimer; //タイマー用
         private Obj obj;
-        private PictureBox pb;
 
+        Bar bar;            //Barインスタンス格納用
+        PictureBox pbBar;   //表示用
 
+        //Listコレクション
         private List<Obj> balls = new List<Obj>(); //ボールインスタンス格納用
         private List<PictureBox> pbs = new List<PictureBox>();　//画像表示用
 
@@ -22,21 +24,36 @@ namespace BallApp {
         }
 
         public Program() {
+            //フォーム
             Size = new Size(800, 600);
             this.BackColor = Color.Green;
             this.MouseClick += Program_MouseClick;
             this.KeyDown += Program_KeyDown;
+
+            //Barインスタンス生成
+            bar = new Bar(340, 500);
+            pbBar = new PictureBox();
+            pbBar.Image = bar.Image;
+            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
+            pbBar.Size = new Size(150, 10);
+            pbBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbBar.Parent = this;
+
+            //タイマー生成
             moveTimer = new Timer();
             moveTimer.Interval = 1; //タイマーのインターバル（ms）
-            moveTimer.Tick += MoveTimer_Tick;　//デリゲート登録
+            moveTimer.Tick += MoveTimer_Tick; //デリゲート登録
+
         }
         //キーが押された時のイベントハンドラ
         private void Program_KeyDown(object sender, KeyEventArgs e) {
-           
+            bar.Move(e.KeyData);
+            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
         }
-
+        private PictureBox pb;
         //マウスクリック時のイベントハンドラ
         private void Program_MouseClick(object sender, MouseEventArgs e) {
+
             pb = new PictureBox();//画像を表示するコントロール
             //ボールインスタンス生成
             if (e.Button == MouseButtons.Left)
