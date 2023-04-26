@@ -16,10 +16,10 @@ namespace BallApp {
 
         //抽象クラスを継承しているので、不要なメソッドは空にする
         public override void Move() {
-            //(空のメソッドにする)
+            ; //(空のメソッドにする)
         }
 
-        public void Move(Keys direction) {
+        public override void Move(Keys direction) {
             if (direction == Keys.Right)
             {
                 if (PosX < 640)

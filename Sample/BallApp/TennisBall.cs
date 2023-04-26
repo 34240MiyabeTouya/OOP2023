@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
     class TennisBall : Obj {
@@ -23,7 +24,7 @@ namespace BallApp {
             Count++;
         }
 
-        
+
 
         //メソッド
         public override void Move() {
@@ -37,6 +38,10 @@ namespace BallApp {
             }
             PosX += MoveX;
             PosY += MoveY;
+        }
+
+        public override void Move(Keys direction) {
+            ;
         }
     }
 }

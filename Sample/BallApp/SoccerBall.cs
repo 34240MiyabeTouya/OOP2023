@@ -4,9 +4,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
-    class SoccerBall : Obj{
+    class SoccerBall : Obj {
 
         //フィールド
         Random rand = new Random(); //乱数インスタンス
@@ -15,7 +16,7 @@ namespace BallApp {
         public static int Count { get => count; set => count = value; }
 
         //コンストラクタ
-        public SoccerBall(double xp,double yp):base(xp,yp, @"pic\soccer_ball.png") {
+        public SoccerBall(double xp, double yp) : base(xp, yp, @"pic\soccer_ball.png") {
 
             int radX = rand.Next(-15, 15);
             MoveX = (radX != 0 ? radX : 1); //乱数で移動量を設定
@@ -37,6 +38,10 @@ namespace BallApp {
             }
             PosX += MoveX;
             PosY += MoveY;
+        }
+
+        public override void Move(Keys direction) {
+            ;
         }
     }
 }
