@@ -14,6 +14,7 @@ namespace BallApp {
         private double posY; //y座標
         private double moveX;  //移動量（x方向）
         private double moveY;  //移動量（y方向）
+        
 
         //プロパティ
         public Image Image { get => image; set => image = value; }
@@ -21,7 +22,6 @@ namespace BallApp {
         public double PosY { get => posY; set => posY = value; }
         public double MoveX { get => moveX; set => moveX = value; }
         public double MoveY { get => moveY; set => moveY = value; }
-
 
         public Obj(double PosX,double PosY,string Path) {
             this.PosX = PosX;

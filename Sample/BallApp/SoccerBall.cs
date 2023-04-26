@@ -10,6 +10,9 @@ namespace BallApp {
 
         //フィールド
         Random rand = new Random(); //乱数インスタンス
+        private static int count;
+
+        public static int Count { get => count; set => count = value; }
 
         //コンストラクタ
         public SoccerBall(double xp,double yp):base(xp,yp, @"pic\soccer_ball.png") {
@@ -19,9 +22,8 @@ namespace BallApp {
 
             int radY = rand.Next(-15, 15);
             MoveY = (radY != 0 ? radY : 1); //乱数で移動量を設定
+            Count++;
         }
-
-       
 
         //メソッド
         public override void Move() {
