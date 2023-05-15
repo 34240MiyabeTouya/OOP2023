@@ -9,6 +9,11 @@ namespace SalesCalculator {
     class Program {
         static void Main(string[] args) {
 
+            SalesCounter sales = new SalesCounter(ReadSales(@"date\sales.csv"));
+            Dictionary<string, int> amountPerStore = sales.GetPerStoreSales();
+            foreach (KeyValuePair<string,int> obj in amountPerStore) {
+                Console.WriteLine("{0}{1:C}",obj.Key,obj.Value);
+            }
         }
 
         //売り上げデータを読み込み、Saleオブジェクトのlistを返す
@@ -20,7 +25,7 @@ namespace SalesCalculator {
 
                 string[] items = line.Split(',');　//区切りで項目別に分ける
                 //Saleインスタンスを生成
-                Sale sale = new Sale{ShopName = items[0], productCategory = items[1], Amount = int.Parse(items[2])};
+                Sale sale = new Sale { ShopName = items[0], productCategory = items[1], Amount = int.Parse(items[2]) };
                 sales.Add(sale);　//Saleインスタンスをコレクションに追加
             }
             return sales;
