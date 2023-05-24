@@ -43,6 +43,7 @@ namespace Exercise01 {
             var date = numbers.Where(s => s >= 50);
             foreach (var num in date) {
                 Console.WriteLine(num);
+                //numbers.Where(n => n >= 50).ToList().ForEach(Console.WriteLine);
             }
         }
 
@@ -50,6 +51,7 @@ namespace Exercise01 {
             var list =  numbers.Select(s => s * 2).ToList();
             foreach (var item in list) {
                 Console.WriteLine(item);
+                //numbers.Select(n => n * 2).ToList().ForEach(Console.WriteLine);
             }
         }
     }
