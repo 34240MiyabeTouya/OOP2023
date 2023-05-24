@@ -36,15 +36,21 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_2(List<int> numbers) {
-
+            numbers.ForEach(s => Console.WriteLine (s/2.0));
         }
 
         private static void Exercise1_3(List<int> numbers) {
-
+            var date = numbers.Where(s => s >= 50);
+            foreach (var num in date) {
+                Console.WriteLine(num);
+            }
         }
 
         private static void Exercise1_4(List<int> numbers) {
-
+            var list =  numbers.Select(s => s * 2).ToList();
+            foreach (var item in list) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
