@@ -44,9 +44,7 @@ namespace Exercise02 {
             var cnt = names.Where(s => s.Contains("o")).ToArray();
             foreach (var name in cnt) {
                 Console.WriteLine(name);
-
             }
-
         }
 
         private static void Exercise2_4(List<string> names) {
