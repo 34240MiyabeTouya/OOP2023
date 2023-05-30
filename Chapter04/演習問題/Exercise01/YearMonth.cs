@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Exercise01 {
     public class YearMonth {
-        private readonly int year, month;
-        
+
+        public int Year { get; private set; }
+        public int Month { get; private set; }
+
+        public YearMonth(int year,int month) {
+            Year = year;
+            Month = month;
+        }
     }
 }
