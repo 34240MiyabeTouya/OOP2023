@@ -37,9 +37,6 @@ namespace Exercise03 {
 
         private static void Exercise3_3(string text) {
            
-
-                }
-            }
         }
 
         private static void Exercise3_4(string text) {
