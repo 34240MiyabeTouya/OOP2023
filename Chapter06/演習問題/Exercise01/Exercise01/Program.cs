@@ -30,15 +30,19 @@ namespace Exercise01 {
 
         private static void Exercise1_2(int[] numbers) {
             Console.WriteLine(numbers[numbers.Length-1]);
-            Console.WriteLine( numbers[numbers.Length-2]);
+            Console.WriteLine(numbers[numbers.Length-2]);
         }
 
         private static void Exercise1_3(int[] numbers) {
-        
+            var stnumbers =  numbers.Select(n => n.ToString());
+            foreach (var num in stnumbers) {
+                Console.Write(num);
+            }
+            Console.WriteLine();
         }
 
         private static void Exercise1_4(int[] numbers) {
-        
+            
         }
 
         private static void Exercise1_5(int[] numbers) {
