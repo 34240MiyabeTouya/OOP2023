@@ -49,7 +49,10 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_5(int[] numbers) {
-        
+            var number = numbers.Distinct().Where(n=>n>10).Count();
+            
+                Console.WriteLine(number);
+            
         }
 
     }
