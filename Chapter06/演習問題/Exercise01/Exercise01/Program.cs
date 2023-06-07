@@ -42,7 +42,10 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(int[] numbers) {
-            
+            var number = numbers.OrderBy(n=>n).Take(3);
+            foreach (var num in number) {
+                Console.WriteLine(num);
+            }
         }
 
         private static void Exercise1_5(int[] numbers) {
