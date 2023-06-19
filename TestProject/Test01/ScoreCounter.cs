@@ -30,10 +30,10 @@ namespace Test01 {
         public IDictionary<string, int> GetPerStudentScore() {
             var dict = new Dictionary<string, int>();
             foreach (var score in _score) {
-                if (dict.ContainsKey(score.Name)) {
-                    dict[score.Name] += score.Score;
+                if (dict.ContainsKey(score.Subject)) {
+                    dict[score.Subject] += score.Score;//教科が既に存在する
                 } else {
-                    dict[score.Name] = score.Score;
+                    dict[score.Subject] = score.Score;//教科が存在しない
                 }
             }
             return dict;
