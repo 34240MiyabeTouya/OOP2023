@@ -58,7 +58,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(List<Book> books) {
-            var book = books.Where(n => n.Price > 400);
+            var book = books.FirstOrDefault(n => n.Price > 4000);
+            Console.WriteLine("{0}",book.Title);
         }
 
         private static void Exercise2_5(List<Book> books) {
