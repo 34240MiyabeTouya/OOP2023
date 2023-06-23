@@ -49,13 +49,13 @@ namespace Section01 {
             Console.Write("1:一覧表示　2:県名指定　:");
             var num = Console.ReadLine();
             if (num == "1") {
-                foreach (var item in Dict) {
-                    Console.WriteLine("{0}【{1}({2})】", item.Key,item.Value.City,item.Value.Population);
+                foreach (var item in Dict.OrderByDescending(n =>n.Value.Population)) {
+                    Console.WriteLine("{0}【{1}(人口:{2})】", item.Key,item.Value.City,item.Value.Population);
                 }
             } else if (num == "2") {
                 Console.Write("県名を入力");
                 string ken = Console.ReadLine();
-                Console.WriteLine("【{0}({1})】です。", Dict[ken].City,Dict[ken].Population);
+                Console.WriteLine("【{0}(人口:{1})】です。", Dict[ken].City,Dict[ken].Population);
             }
         }
     }
