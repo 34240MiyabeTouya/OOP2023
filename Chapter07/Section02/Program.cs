@@ -51,15 +51,15 @@ namespace Section02 {
             var num = Console.ReadLine();
             if (num == "1") {
                 foreach (var item in Dict) {
-                    foreach (var item1 in item.Value) {
+                    foreach (var item1 in item.Value.OrderByDescending(n => n.Population)) {
                         Console.WriteLine("{0}【{1}(人口:{2})】", item.Key, item1.City, item1.Population);
                     }
                 }
             } else if (num == "2") {
-                Console.Write("県名を入力");
-                string ken = Console.ReadLine();
-                foreach (var item in Dict[ken]) {
-                        Console.WriteLine("{0}【{1}(人口:{2})】", ken, item.City, item.Population);
+                Console.Write("県名を入力:");
+                var ken = Console.ReadLine();
+                foreach (var item in Dict[ken].OrderByDescending(n => n.Population)) {
+                    Console.WriteLine("{0}【{1}(人口:{2})】", ken, item.City, item.Population);
                 }
             }
         }
