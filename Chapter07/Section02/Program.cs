@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace Section02 {
     class Program {
         static void Main(string[] args) {
-            var list = new List<string>() {
-
-            };
+            
             var Dict = new Dictionary<string, List<CityInfo>>();
 
             string pref;

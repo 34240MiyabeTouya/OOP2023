@@ -57,20 +57,20 @@ namespace Exercise04 {
 
 #endif
 
-            static string ToJapanese(string key) {
-                switch (key) {
-                    case "Novelist";
-                        return "作家";
-                    case "BestWork";
-                        return "代表作";
-                    case "Born";
-                        return "誕生年";
-                }
-                throw new ArgumentException("正しい引数ではありません");
-            }
+    //        static string ToJapanese(string key) {
+    //            switch (key) {
+    //                case "Novelist";
+    //                    return "作家";
+    //                case "BestWork";
+    //                    return "代表作";
+    //                case "Born";
+    //                    return "誕生年";
+    //            }
+    //            throw new ArgumentException("正しい引数ではありません");
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
 }
 
