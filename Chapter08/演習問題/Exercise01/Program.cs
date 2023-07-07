@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Exercise01 {
@@ -36,7 +37,14 @@ namespace Exercise01 {
         }
 
         private static void DisplayDatePattern3_2(DateTime dateTime) {
-        
+            var cluture = new CultureInfo("ja-JP");
+            cluture.DateTimeFormat.Calendar = new JapaneseCalendar();
+
+            var dateStr = dateTime.ToString("ggyy年MM月dd日(dddd)", cluture);
+            //ゼロサプレスを実施(不要なゼロを取り除く)
+            var str = Regex.Replace(dateStr, @"0(\d)","$1");
+            Console.WriteLine(str);
+
         }
     }
 }
