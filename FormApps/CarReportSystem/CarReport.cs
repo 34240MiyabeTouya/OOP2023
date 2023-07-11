@@ -20,7 +20,6 @@ namespace CarReportSystem {
         [System.ComponentModel.DisplayName("画像")]
         public Image CarImage { get; set; }
 
-
         //メーカー一覧【列挙型】
         public enum MakerGroup {
             トヨタ,
