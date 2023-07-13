@@ -17,29 +17,52 @@ namespace CarReportSystem {
             dgvCarReports.DataSource = CarReports;
         }
 
+        //ステータスラベルのテキスト表示・非表示
+        private void statasLabelDisp(string msg = "") {
+            tsInfoText.Text = msg;
+        }
+
         //追加ボタンがクリックされた時のイベントハンドラー
         private void btAdd_Click(object sender, EventArgs e) {
+            statasLabelDisp();//ステータスラベルのテキスト非表示
+            if (cbAuthor.Text == "") {
+                statasLabelDisp("記録者を入力してください。");
+                return;
+            } else if (cbCarName.Text == "") {
+                statasLabelDisp("車名を入力してください。");
+                return;
+            } 
+
             var CarReport = new CarReport {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
-                Maker = getSelectedMaker().ToString(),
+                Maker = getSelectedMaker(),
                 CarName = cbCarName.Text,
                 Report = tbReport.Text,
                 CarImage = pbCerImage.Image,
             };
             CarReports.Add(CarReport);
             btModify.Enabled = true;//マスク解除
+            btDelete.Enabled = true;//マスク解除
+            dgvCarReports.CurrentCell = null;//選択の解除
+
+            //コンボボックスに重複がない場合追加
+            if (!cbAuthor.Items.Contains(cbAuthor.Text)) {
+                cbAuthor.Items.Add(cbAuthor.Text);//コンボボックスに追加
+            }
+            if (!cbCarName.Items.Contains(cbCarName.Text)) {
+                cbCarName.Items.Add(cbCarName.Text);//コンボボックスに追加
+            }
         }
 
         //ラジオボタンで選択されているメーカーを返却
         private CarReport.MakerGroup getSelectedMaker() {
-            int tag = 0;
             foreach (var item in gbMaker.Controls) {
                 if (((RadioButton)item).Checked) {
                       return (CarReport.MakerGroup)int.Parse(((RadioButton)item).Tag.ToString());
                 }
             }
-            return (CarReport.MakerGroup)tag;
+            return CarReport.MakerGroup.その他;
         }
 
         //指定したメーカーのラジオボタンをセット
@@ -69,8 +92,6 @@ namespace CarReportSystem {
                 case CarReport.MakerGroup.その他:
                     rbOther.Checked = true;
                     break;
-                default:
-                    break;
             }
         }
 
@@ -85,10 +106,15 @@ namespace CarReportSystem {
             foreach (DataGridViewRow item in dgvCarReports.SelectedRows) {
                     dgvCarReports.Rows.Remove(item);
             }
+
+            if (dgvCarReports.ColumnCount == 0) {
+                btModify.Enabled = false;//マスクする
+                btDelete.Enabled = false;//マスクする
+            }
         }
 
         //レコードの選択時
-        private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvCarReports_CellContentClick(object sender, EventArgs e) {
             dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
             cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
             setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
@@ -100,16 +126,27 @@ namespace CarReportSystem {
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReports.Columns[5].Visible = false;//画像項目非表示
             btModify.Enabled = false;//マスクする
+            btDelete.Enabled = false;//マスクする
+            tsInfoText.Text = "ここにメッセージを表示できます";
         }
 
         //修正ボタンイベントハンドラ
         private void btModify_Click(object sender, EventArgs e) {
             CarReports[dgvCarReports.CurrentRow.Index].Date = dtpDate.Value;
             CarReports[dgvCarReports.CurrentRow.Index].Author = cbAuthor.Text;
-            CarReports[dgvCarReports.CurrentRow.Index].Maker = getSelectedMaker().ToString();
+            CarReports[dgvCarReports.CurrentRow.Index].Maker = getSelectedMaker();
             CarReports[dgvCarReports.CurrentRow.Index].CarName = cbCarName.Text;
             CarReports[dgvCarReports.CurrentRow.Index].Report = tbReport.Text;
             dgvCarReports.Refresh();//一覧更新
+        }
+
+        //終了メニュー選択時のイベントハンドラ
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void cbAuthor_SelectionChangeCommitted(object sender, EventArgs e) {
+           
         }
     }
 }
