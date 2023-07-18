@@ -44,7 +44,7 @@ namespace CarReportSystem {
             CarReports.Add(CarReport);
             btModify.Enabled = true;//マスク解除
             btDelete.Enabled = true;//マスク解除
-            dgvCarReports.CurrentCell = null;//選択の解除
+            editItemsClear();//各項目の選択解除
 
             //コンボボックスに重複がない場合追加
             if (!cbAuthor.Items.Contains(cbAuthor.Text)) {
@@ -55,6 +55,16 @@ namespace CarReportSystem {
             }
         }
 
+        //各項目をクリア
+        private void editItemsClear() {
+            cbAuthor.Text = "";
+            setSelectedMaker(CarReport.MakerGroup.トヨタ);
+            cbCarName.Text = "";
+            tbReport.Text = null;
+            pbCerImage.Image = null;
+            dgvCarReports.CurrentCell = null;//選択の解除
+        }
+       
         //ラジオボタンで選択されているメーカーを返却
         private CarReport.MakerGroup getSelectedMaker() {
             foreach (var item in gbMaker.Controls) {
@@ -107,7 +117,7 @@ namespace CarReportSystem {
                     dgvCarReports.Rows.Remove(item);
             }
 
-            if (dgvCarReports.ColumnCount == 0) {
+            if (dgvCarReports.Rows.Count == 0) {
                 btModify.Enabled = false;//マスクする
                 btDelete.Enabled = false;//マスクする
             }
@@ -127,7 +137,6 @@ namespace CarReportSystem {
             dgvCarReports.Columns[5].Visible = false;//画像項目非表示
             btModify.Enabled = false;//マスクする
             btDelete.Enabled = false;//マスクする
-            tsInfoText.Text = "ここにメッセージを表示できます";
         }
 
         //修正ボタンイベントハンドラ
@@ -145,8 +154,19 @@ namespace CarReportSystem {
             Application.Exit();
         }
 
-        private void cbAuthor_SelectionChangeCommitted(object sender, EventArgs e) {
-           
+        //バージョン情報メニュー選択時のイベントハンドラ
+        private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
+            var vf  = new VersionForm();
+            vf.ShowDialog();
+        }
+
+        //色設定メニュー選択時のイベントハンドラ
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            ColorDialog cdcolor = new ColorDialog();
+            cdColor.Color = Form1.DefaultBackColor;
+            if (cdColor.ShowDialog()==DialogResult.OK) {
+                this.BackColor = cdColor.Color;
+            }
         }
     }
 }
