@@ -12,6 +12,7 @@ namespace CarReportSystem {
     public partial class Form1 : Form {
         //管理用データ
         BindingList<CarReport> CarReports = new BindingList<CarReport>();
+        private int mode;
         public Form1() {
             InitializeComponent();
             dgvCarReports.DataSource = CarReports;
@@ -31,7 +32,7 @@ namespace CarReportSystem {
             } else if (cbCarName.Text == "") {
                 statasLabelDisp("車名を入力してください。");
                 return;
-            } 
+            }
 
             var CarReport = new CarReport {
                 Date = dtpDate.Value,
@@ -55,6 +56,30 @@ namespace CarReportSystem {
             }
         }
 
+        //修正ボタンイベントハンドラ
+        private void btModify_Click(object sender, EventArgs e) {
+            if (dgvCarReports.Rows.Count != 0) {
+                CarReports[dgvCarReports.CurrentRow.Index].Date = dtpDate.Value;
+                CarReports[dgvCarReports.CurrentRow.Index].Author = cbAuthor.Text;
+                CarReports[dgvCarReports.CurrentRow.Index].Maker = getSelectedMaker();
+                CarReports[dgvCarReports.CurrentRow.Index].CarName = cbCarName.Text;
+                CarReports[dgvCarReports.CurrentRow.Index].Report = tbReport.Text;
+                dgvCarReports.Refresh();//一覧更新
+            }
+        }
+
+        //削除ボタンのイベントハンドラ
+        private void btDelete_Click(object sender, EventArgs e) {
+            foreach (DataGridViewRow item in dgvCarReports.SelectedRows) {
+                dgvCarReports.Rows.Remove(item);
+            }
+
+            if (dgvCarReports.Rows.Count == 0) {
+                btModify.Enabled = false;//マスクする
+                btDelete.Enabled = false;//マスクする
+            }
+        }
+
         //各項目をクリア
         private void editItemsClear() {
             cbAuthor.Text = "";
@@ -64,12 +89,12 @@ namespace CarReportSystem {
             pbCerImage.Image = null;
             dgvCarReports.CurrentCell = null;//選択の解除
         }
-       
+
         //ラジオボタンで選択されているメーカーを返却
         private CarReport.MakerGroup getSelectedMaker() {
             foreach (var item in gbMaker.Controls) {
                 if (((RadioButton)item).Checked) {
-                      return (CarReport.MakerGroup)int.Parse(((RadioButton)item).Tag.ToString());
+                    return (CarReport.MakerGroup)int.Parse(((RadioButton)item).Tag.ToString());
                 }
             }
             return CarReport.MakerGroup.その他;
@@ -107,30 +132,28 @@ namespace CarReportSystem {
 
         //画像を開くのイベントハンドラ
         private void btImageOpen_Click(object sender, EventArgs e) {
-            ofdImageFilOpen.ShowDialog();
-            pbCerImage.Image = Image.FromFile(ofdImageFilOpen.FileName);
-        }
-
-        //削除ボタンのイベントハンドラ
-        private void btDelete_Click(object sender, EventArgs e) {
-            foreach (DataGridViewRow item in dgvCarReports.SelectedRows) {
-                    dgvCarReports.Rows.Remove(item);
-            }
-
-            if (dgvCarReports.Rows.Count == 0) {
-                btModify.Enabled = false;//マスクする
-                btDelete.Enabled = false;//マスクする
+            if (ofdImageFilOpen.ShowDialog() == DialogResult.OK) {
+                pbCerImage.Image = Image.FromFile(ofdImageFilOpen.FileName);
             }
         }
+
+        //画像削除のイベントハンドラ
+        private void btImageDelete_Click(object sender, EventArgs e) {
+
+        }
+
+
 
         //レコードの選択時
         private void dgvCarReports_CellContentClick(object sender, EventArgs e) {
-            dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
-            cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
-            setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
-            cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
-            tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
-            pbCerImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+            if (dgvCarReports.RowCount != 0) {
+                dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
+                cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
+                setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
+                cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
+                tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
+                pbCerImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -139,15 +162,7 @@ namespace CarReportSystem {
             btDelete.Enabled = false;//マスクする
         }
 
-        //修正ボタンイベントハンドラ
-        private void btModify_Click(object sender, EventArgs e) {
-            CarReports[dgvCarReports.CurrentRow.Index].Date = dtpDate.Value;
-            CarReports[dgvCarReports.CurrentRow.Index].Author = cbAuthor.Text;
-            CarReports[dgvCarReports.CurrentRow.Index].Maker = getSelectedMaker();
-            CarReports[dgvCarReports.CurrentRow.Index].CarName = cbCarName.Text;
-            CarReports[dgvCarReports.CurrentRow.Index].Report = tbReport.Text;
-            dgvCarReports.Refresh();//一覧更新
-        }
+
 
         //終了メニュー選択時のイベントハンドラ
         private void 終了XToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -156,17 +171,21 @@ namespace CarReportSystem {
 
         //バージョン情報メニュー選択時のイベントハンドラ
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
-            var vf  = new VersionForm();
+            var vf = new VersionForm();
             vf.ShowDialog();
         }
 
         //色設定メニュー選択時のイベントハンドラ
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            ColorDialog cdcolor = new ColorDialog();
-            cdColor.Color = Form1.DefaultBackColor;
-            if (cdColor.ShowDialog()==DialogResult.OK) {
-                this.BackColor = cdColor.Color;
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColor.Color;
             }
+        }
+
+        //★ボタン(サイズ変更)のイベントハンドラ
+        private void btScaleChange_Click(object sender, EventArgs e) {
+            mode = mode < 4 ? ++mode : 0;
+            pbCerImage.SizeMode = (PictureBoxSizeMode)mode;
         }
     }
 }
