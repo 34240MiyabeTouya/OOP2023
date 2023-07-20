@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarReportSystem.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
@@ -17,6 +20,9 @@ namespace CarReportSystem {
             InitializeComponent();
             dgvCarReports.DataSource = CarReports;
         }
+
+        //設定情報保存用オブジェクト
+        Settings settings = new Settings();
 
         //ステータスラベルのテキスト表示・非表示
         private void statasLabelDisp(string msg = "") {
@@ -139,10 +145,8 @@ namespace CarReportSystem {
 
         //画像削除のイベントハンドラ
         private void btImageDelete_Click(object sender, EventArgs e) {
-
+            pbCerImage.Image = null;
         }
-
-
 
         //レコードの選択時
         private void dgvCarReports_CellContentClick(object sender, EventArgs e) {
@@ -160,9 +164,17 @@ namespace CarReportSystem {
             dgvCarReports.Columns[5].Visible = false;//画像項目非表示
             btModify.Enabled = false;//マスクする
             btDelete.Enabled = false;//マスクする
+
+            //設定ファイルを逆シリアル化して背景に設定
+            using (var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                var sttings = serializer.Deserialize(reader) as Settings;
+                if (settings.MainFormColor != 0) {
+                    BackColor = Color.FromArgb(settings.MainFormColor);
+                }
+            }
+
         }
-
-
 
         //終了メニュー選択時のイベントハンドラ
         private void 終了XToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -179,13 +191,22 @@ namespace CarReportSystem {
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
+                settings.MainFormColor = cdColor.Color.ToArgb();
             }
         }
 
         //★ボタン(サイズ変更)のイベントハンドラ
         private void btScaleChange_Click(object sender, EventArgs e) {
-            mode = mode < 4 ? ++mode : 0;
+            mode = mode < 4 ? (mode == 1) ? 3 : ++mode : 0;//AutoSize(2)を除外
             pbCerImage.SizeMode = (PictureBoxSizeMode)mode;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルのシリアル化
+            using (var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
         }
     }
 }

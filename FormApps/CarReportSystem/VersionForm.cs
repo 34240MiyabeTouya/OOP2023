@@ -22,5 +22,7 @@ namespace CarReportSystem {
         private void VersionForm_Load(object sender, EventArgs e) {
             tbVersion.Text = "1.0.0";
         }
+
+       
     }
 }

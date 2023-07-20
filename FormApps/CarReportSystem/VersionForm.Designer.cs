@@ -25,9 +25,9 @@ namespace CarReportSystem {
         /// </summary>
         private void InitializeComponent() {
             this.btOk = new System.Windows.Forms.Button();
-            this.tbVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.tbVersion = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btOk
@@ -40,15 +40,6 @@ namespace CarReportSystem {
             this.btOk.UseVisualStyleBackColor = true;
             this.btOk.Click += new System.EventHandler(this.btOk_Click);
             // 
-            // tbVersion
-            // 
-            this.tbVersion.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbVersion.Location = new System.Drawing.Point(126, 9);
-            this.tbVersion.Name = "tbVersion";
-            this.tbVersion.ReadOnly = true;
-            this.tbVersion.Size = new System.Drawing.Size(153, 28);
-            this.tbVersion.TabIndex = 2;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -58,6 +49,15 @@ namespace CarReportSystem {
             this.label1.Size = new System.Drawing.Size(129, 19);
             this.label1.TabIndex = 1;
             this.label1.Text = "バージョン情報：";
+            // 
+            // tbVersion
+            // 
+            this.tbVersion.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbVersion.Location = new System.Drawing.Point(127, 9);
+            this.tbVersion.Name = "tbVersion";
+            this.tbVersion.ReadOnly = true;
+            this.tbVersion.Size = new System.Drawing.Size(233, 28);
+            this.tbVersion.TabIndex = 2;
             // 
             // VersionForm
             // 
@@ -80,8 +80,8 @@ namespace CarReportSystem {
         #endregion
 
         private System.Windows.Forms.Button btOk;
-        private System.Windows.Forms.TextBox tbVersion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.TextBox tbVersion;
     }
 }
