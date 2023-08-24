@@ -161,18 +161,20 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            tsInfoText.Text = "";
+
             dgvCarReports.Columns[5].Visible = false;//画像項目非表示
             btModify.Enabled = false;//マスクする
             btDelete.Enabled = false;//マスクする
 
             //設定ファイルを逆シリアル化して背景に設定
-            using (var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                var sttings = serializer.Deserialize(reader) as Settings;
-                if (settings.MainFormColor != 0) {
-                    BackColor = Color.FromArgb(settings.MainFormColor);
-                }
-            }
+            //using (var reader = XmlReader.Create("settings.xml")) {
+            //    var serializer = new XmlSerializer(typeof(Settings));
+            //    var sttings = serializer.Deserialize(reader) as Settings;
+            //    if (settings.MainFormColor != 0) {
+            //        BackColor = Color.FromArgb(settings.MainFormColor);
+            //    }
+            //}
 
         }
 
@@ -207,6 +209,13 @@ namespace CarReportSystem {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
             }
+        }
+
+        private void tmTimerUpdate_Tick(object sender, EventArgs e) {
+
+            tsInfoText.Text = "";
+            //tstimedisp.text = DateTime.Now.ToString("yyyy年MM月dd日 HH時ss分");
+            tmTimerUpdate.Start();
         }
     }
 }
