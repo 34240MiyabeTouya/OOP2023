@@ -168,13 +168,13 @@ namespace CarReportSystem {
             btDelete.Enabled = false;//マスクする
 
             //設定ファイルを逆シリアル化して背景に設定
-            //using (var reader = XmlReader.Create("settings.xml")) {
-            //    var serializer = new XmlSerializer(typeof(Settings));
-            //    var sttings = serializer.Deserialize(reader) as Settings;
-            //    if (settings.MainFormColor != 0) {
-            //        BackColor = Color.FromArgb(settings.MainFormColor);
-            //    }
-            //}
+            using (var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                var sttings = serializer.Deserialize(reader) as Settings;
+                if (settings.MainFormColor != 0) {
+                    BackColor = Color.FromArgb(settings.MainFormColor);
+                }
+            }
 
         }
 
@@ -216,6 +216,22 @@ namespace CarReportSystem {
             tsInfoText.Text = "";
             //tstimedisp.text = DateTime.Now.ToString("yyyy年MM月dd日 HH時ss分");
             tmTimerUpdate.Start();
+        }
+
+        private void 保存SToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (sfdCarRepoSave.ShowDialog() == DialogResult.OK) {
+
+
+
+            }
+        }
+
+        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
+
+
+
+            }
         }
     }
 }
