@@ -49,7 +49,7 @@ namespace CarReportSystem {
             this.btImageOpen = new System.Windows.Forms.Button();
             this.btImageDelete = new System.Windows.Forms.Button();
             this.pbCarImage = new System.Windows.Forms.PictureBox();
-            this.btAddReport = new System.Windows.Forms.Button();
+            this.btAdd = new System.Windows.Forms.Button();
             this.btModify = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -271,10 +271,12 @@ namespace CarReportSystem {
             this.dgvCarReports.MultiSelect = false;
             this.dgvCarReports.Name = "dgvCarReports";
             this.dgvCarReports.ReadOnly = true;
+            this.dgvCarReports.RowHeadersVisible = false;
             this.dgvCarReports.RowTemplate.Height = 21;
             this.dgvCarReports.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReports.Size = new System.Drawing.Size(520, 165);
             this.dgvCarReports.TabIndex = 10;
+            this.dgvCarReports.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCarReports_CellContentClick);
             // 
             // label6
             // 
@@ -324,14 +326,15 @@ namespace CarReportSystem {
             this.pbCarImage.TabIndex = 13;
             this.pbCarImage.TabStop = false;
             // 
-            // btAddReport
+            // btAdd
             // 
-            this.btAddReport.Location = new System.Drawing.Point(378, 353);
-            this.btAddReport.Name = "btAddReport";
-            this.btAddReport.Size = new System.Drawing.Size(75, 31);
-            this.btAddReport.TabIndex = 15;
-            this.btAddReport.Text = "追加";
-            this.btAddReport.UseVisualStyleBackColor = true;
+            this.btAdd.Location = new System.Drawing.Point(378, 353);
+            this.btAdd.Name = "btAdd";
+            this.btAdd.Size = new System.Drawing.Size(75, 31);
+            this.btAdd.TabIndex = 15;
+            this.btAdd.Text = "追加";
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click_1);
             // 
             // btModify
             // 
@@ -341,6 +344,7 @@ namespace CarReportSystem {
             this.btModify.TabIndex = 16;
             this.btModify.Text = "修正";
             this.btModify.UseVisualStyleBackColor = true;
+            this.btModify.Click += new System.EventHandler(this.btModify_Click_1);
             // 
             // btDelete
             // 
@@ -350,6 +354,7 @@ namespace CarReportSystem {
             this.btDelete.TabIndex = 17;
             this.btDelete.Text = "削除";
             this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click_1);
             // 
             // label8
             // 
@@ -499,7 +504,7 @@ namespace CarReportSystem {
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btModify);
-            this.Controls.Add(this.btAddReport);
+            this.Controls.Add(this.btAdd);
             this.Controls.Add(this.pbCarImage);
             this.Controls.Add(this.btImageDelete);
             this.Controls.Add(this.btImageOpen);
@@ -563,7 +568,7 @@ namespace CarReportSystem {
         private System.Windows.Forms.Button btImageOpen;
         private System.Windows.Forms.Button btImageDelete;
         private System.Windows.Forms.PictureBox pbCarImage;
-        private System.Windows.Forms.Button btAddReport;
+        private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btModify;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.Label label8;
