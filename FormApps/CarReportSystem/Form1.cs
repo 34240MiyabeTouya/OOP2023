@@ -23,7 +23,7 @@ namespace CarReportSystem {
 
         public Form1() {
             InitializeComponent();
-            dgvCarReports.DataSource = CarReports;
+            //dgvCarReports.DataSource = CarReports;
         }
 
         //ステータスラベルのテキスト表示・非表示（引数なしはメッセージ非表示）
@@ -133,6 +133,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+           
 
             tsTimeDisp.Text = "";   //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString("yyyy年MM月dd日 HH時mm分ss秒");
@@ -279,6 +280,10 @@ namespace CarReportSystem {
             }
         }
 
-       
+        //接続ボタンのイベントハンドラ
+        private void btConnection_Click(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202324DataSet.CarReportTable' テーブルに読み込みます。
+            this.carReportTableTableAdapter.Fill(this.infosys202324DataSet.CarReportTable);
+        }
     }
 }
