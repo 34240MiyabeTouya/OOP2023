@@ -53,6 +53,10 @@ namespace CarReportSystem {
             };
             CarReports.Add(carReport);
 
+            this.Validate();
+            this.carReportTableBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202324DataSet);
+
             setCbAuthor(cbAuthor.Text);     //記録者コンボボックスの履歴登録処理
             setCbCarName(cbCarName.Text);   //車名コンボボックスの履歴登録処理
 
@@ -76,7 +80,7 @@ namespace CarReportSystem {
         //項目クリア処理
         private void editItemsClear() {
             cbAuthor.Text = "";
-            setSelectedMaker(CarReport.MakerGroup.トヨタ);
+            setSelectedMaker("トヨタ");
             cbCarName.Text = "";
             tbReport.Text = "";
             pbCarImage.Image = null;
@@ -97,30 +101,30 @@ namespace CarReportSystem {
         }
 
         //指定したメーカーのラジオボタンをセット
-        private void setSelectedMaker(CarReport.MakerGroup makerGroup) {
+        private void setSelectedMaker(string makerGroup) {
             switch (makerGroup) {
-                case CarReport.MakerGroup.トヨタ:
+                case "トヨタ":
                     rbToyota.Checked = true;
                     break;
-                case CarReport.MakerGroup.日産:
+                case "日産":
                     rbNissan.Checked = true;
                     break;
-                case CarReport.MakerGroup.ホンダ:
+                case "ホンダ":
                     rbHonda.Checked = true;
                     break;
-                case CarReport.MakerGroup.スバル:
+                case "スバル":
                     rbSubaru.Checked = true;
                     break;
-                case CarReport.MakerGroup.スズキ:
+                case "スズキ":
                     rbSuzuki.Checked = true;
                     break;
-                case CarReport.MakerGroup.ダイハツ:
+                case "ダイハツ":
                     rbDaihatsu.Checked = true;
                     break;
-                case CarReport.MakerGroup.輸入車:
+                case "輸入車":
                     rbImported.Checked = true;
                     break;
-                case CarReport.MakerGroup.その他:
+                case "その他":
                     rbOther.Checked = true;
                     break;
             }
@@ -168,14 +172,17 @@ namespace CarReportSystem {
 
         //修正ボタンイベントハンドラ
         private void btModify_Click_1(object sender, EventArgs e) {
-            if (dgvCarReports.Rows.Count != 0) {
-                CarReports[dgvCarReports.CurrentRow.Index].Date = dtpDate.Value;
-                CarReports[dgvCarReports.CurrentRow.Index].Author = cbAuthor.Text;
-                CarReports[dgvCarReports.CurrentRow.Index].Maker = getSelectedMaker();
-                CarReports[dgvCarReports.CurrentRow.Index].CarName = cbCarName.Text;
-                CarReports[dgvCarReports.CurrentRow.Index].Report = tbReport.Text;
-                dgvCarReports.Refresh();    //一覧更新
-            }
+            dgvCarReports.CurrentRow.Cells[1].Value = dtpDate.Value;
+            dgvCarReports.CurrentRow.Cells[2].Value = cbAuthor.Text;
+            dgvCarReports.CurrentRow.Cells[3].Value = getSelectedMaker();
+            dgvCarReports.CurrentRow.Cells[4].Value = cbCarName.Text;
+            dgvCarReports.CurrentRow.Cells[5].Value = tbReport.Text;
+            dgvCarReports.CurrentRow.Cells[6].Value = pbCarImage.Image;
+
+            //データベースの更新
+            this.Validate();
+            this.carReportTableBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202324DataSet);
         }
         
 
@@ -191,13 +198,6 @@ namespace CarReportSystem {
 
         private void btImageDelete_Click(object sender, EventArgs e) {
             pbCarImage.Image = null;
-        }
-
-        private void カラーToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (cdColor.ShowDialog() == DialogResult.OK) {
-                BackColor = cdColor.Color;
-                settings.MainFormColor = cdColor.Color.ToArgb();
-            }
         }
 
         private void btScaleChange_Click(object sender, EventArgs e) {
@@ -254,7 +254,7 @@ namespace CarReportSystem {
                         dgvCarReports.DataSource = CarReports;
 
                         editItemsClear();//入力途中などのデータはすべてクリア
-                        dgvCarReports.Columns[5].Visible = false;   //画像項目非表示
+                        dgvCarReports.Columns[6].Visible = false;   //画像項目非表示
                         foreach (var carReport in CarReports) {
                             setCbAuthor(carReport.Author);
                             setCbCarName(carReport.CarName);
@@ -268,22 +268,53 @@ namespace CarReportSystem {
         //レコード選択時
         private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (dgvCarReports.Rows.Count != 0) {
-                dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[0].Value;
-                cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
-                setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
-                cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
-                tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
-                pbCarImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+                dtpDate.Value = (DateTime)dgvCarReports.CurrentRow.Cells[1].Value;
+                cbAuthor.Text = dgvCarReports.CurrentRow.Cells[2].Value.ToString();
+                setSelectedMaker(dgvCarReports.CurrentRow.Cells[3].Value.ToString());
+                cbCarName.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
+                tbReport.Text = dgvCarReports.CurrentRow.Cells[5].Value.ToString();
 
+                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value) ?
+                                ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value) : null;
+
+                //if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)) {
+                //    pbCarImage.Image = ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value);
+                //} else {
+                //    pbCarImage.Image = null;
+                //}
+                
                 btModify.Enabled = true;     //修正ボタン有効
                 btDelete.Enabled = true;     //削除ボタン有効
             }
         }
 
+        // バイト配列をImageオブジェクトに変換
+        public static Image ByteArrayToImage(byte[] b) {
+            ImageConverter imgconv = new ImageConverter();
+            Image img = (Image)imgconv.ConvertFrom(b);
+            return img;
+        }
+
+        // Imageオブジェクトをバイト配列に変換
+        public static byte[] ImageToByteArray(Image img) {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return b;
+        }
+
+
         //接続ボタンのイベントハンドラ
         private void btConnection_Click(object sender, EventArgs e) {
             // TODO: このコード行はデータを 'infosys202324DataSet.CarReportTable' テーブルに読み込みます。
             this.carReportTableTableAdapter.Fill(this.infosys202324DataSet.CarReportTable);
+            dgvCarReports.ClearSelection();     //選択解除
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColor.Color;
+                settings.MainFormColor = cdColor.Color.ToArgb();
+            }
         }
     }
 }
