@@ -126,6 +126,7 @@ namespace CarReportSystem {
             }
         }
 
+        //画像を開くのイベントハンドラ
         private void btImageOpen_Click(object sender, EventArgs e) {
             if (ofdImageFileOpen.ShowDialog() == DialogResult.OK) {
                 pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
@@ -133,8 +134,6 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-           
-
             tsTimeDisp.Text = "";   //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString("yyyy年MM月dd日 HH時mm分ss秒");
             tsTimeDisp.BackColor = Color.Black;
@@ -147,6 +146,7 @@ namespace CarReportSystem {
             dgvCarReports.Columns[5].Visible = false;   //画像項目非表示
             btModify.Enabled = false; //修正ボタン無効
             btDelete.Enabled = false; //削除ボタン無効
+            btReset.Enabled = false; //リセットボタン無効
 
             try {
                 //設定ファイルを逆シリアル化して背景を設定
@@ -193,10 +193,12 @@ namespace CarReportSystem {
             vf.ShowDialog();    //モーダルダイアログとして表示
         }
 
+        //画像を削除のイベントハンドラ
         private void btImageDelete_Click(object sender, EventArgs e) {
             pbCarImage.Image = null;
         }
 
+        //画像サイズ変更のイベントハンドラ
         private void btScaleChange_Click(object sender, EventArgs e) {
 
             if (mode < PictureBoxSizeMode.Zoom) {
@@ -214,7 +216,6 @@ namespace CarReportSystem {
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
-
             //設定ファイルのシリアル化
             using (var writer = XmlWriter.Create("settings.xml")) {
                 var serializer = new XmlSerializer(settings.GetType());
@@ -240,28 +241,7 @@ namespace CarReportSystem {
             }
         }
 
-        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
-                try {
-                    //逆シリアル化でバイナリ形式を取り込む
-                    var bf = new BinaryFormatter();
-                    using (FileStream fs = File.Open(ofdCarRepoOpen.FileName, FileMode.Open, FileAccess.Read)) {
-                        CarReports = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvCarReports.DataSource = null;
-                        dgvCarReports.DataSource = CarReports;
-
-                        editItemsClear();//入力途中などのデータはすべてクリア
-                        dgvCarReports.Columns[6].Visible = false;   //画像項目非表示
-                        foreach (var carReport in CarReports) {
-                            setCbAuthor(carReport.Author);
-                            setCbCarName(carReport.CarName);
-                        }
-                    }
-                } catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
+        
         //レコード選択時
         private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (dgvCarReports.Rows.Count != 0) {
@@ -302,6 +282,7 @@ namespace CarReportSystem {
 
         private void 接続toolStripMenuItem_Click(object sender, EventArgs e) {
             NewMethod();
+            btReset.Enabled = true; //リセットボタン有効
         }
 
         private void NewMethod() {
@@ -314,11 +295,35 @@ namespace CarReportSystem {
             }
         }
 
+        //色設定のイベントハンドラ
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
                 settings.MainFormColor = cdColor.Color.ToArgb();
             }
         }
+
+        //記録者で検索ボタンのイベントハンドラ
+        private void btAuthorSearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByAuthor(this.infosys202324DataSet.CarReportTable,tbAuthorSearch.Text);
+            dgvCarReports.ClearSelection();     //選択解除
+        }
+
+        //車名で検索ボタンのイベントハンドラ
+        private void btCarNameSearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByCarName(this.infosys202324DataSet.CarReportTable,tbCarNameSearch.Text);
+            dgvCarReports.ClearSelection();     //選択解除
+        }
+
+        //日付で検索のイベントハンドラ
+        private void btDaySearch_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByDate(this.infosys202324DataSet.CarReportTable, btDaySearch.Text);
+        }
+        //リセットボタンのイベントハンドラ
+        private void btReset_Click(object sender, EventArgs e) {
+            NewMethod();
+        }
+
+        
     }
 }
