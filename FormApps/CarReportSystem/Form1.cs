@@ -300,9 +300,11 @@ namespace CarReportSystem {
             return b;
         }
 
+        private void 接続toolStripMenuItem_Click(object sender, EventArgs e) {
+            NewMethod();
+        }
 
-        //接続ボタンのイベントハンドラ
-        private void btConnection_Click(object sender, EventArgs e) {
+        private void NewMethod() {
             // TODO: このコード行はデータを 'infosys202324DataSet.CarReportTable' テーブルに読み込みます。
             this.carReportTableTableAdapter.Fill(this.infosys202324DataSet.CarReportTable);
             dgvCarReports.ClearSelection();     //選択解除
