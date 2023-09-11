@@ -271,7 +271,8 @@ namespace CarReportSystem {
                 cbCarName.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
                 tbReport.Text = dgvCarReports.CurrentRow.Cells[5].Value.ToString();
 
-                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value) ?
+                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value) 
+                                && ((Byte[])dgvCarReports.CurrentRow.Cells[6].Value).Length != 0 ?
                                 ByteArrayToImage((Byte[])dgvCarReports.CurrentRow.Cells[6].Value) : null;
 
                 //if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)) {
@@ -305,6 +306,10 @@ namespace CarReportSystem {
             // TODO: このコード行はデータを 'infosys202324DataSet.CarReportTable' テーブルに読み込みます。
             this.carReportTableTableAdapter.Fill(this.infosys202324DataSet.CarReportTable);
             dgvCarReports.ClearSelection();     //選択解除
+            foreach (var carReport in infosys202324DataSet.CarReportTable) {
+                setCbAuthor(carReport.Author);
+                setCbCarName(carReport.Carname);
+            }
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
