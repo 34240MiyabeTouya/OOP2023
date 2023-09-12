@@ -44,8 +44,6 @@ namespace CarReportSystem {
             this.label5 = new System.Windows.Forms.Label();
             this.tbReport = new System.Windows.Forms.TextBox();
             this.dgvCarReports = new System.Windows.Forms.DataGridView();
-            this.carReportTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.infosys202324DataSet = new CarReportSystem.infosys202324DataSet();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btImageOpen = new System.Windows.Forms.Button();
@@ -86,25 +84,27 @@ namespace CarReportSystem {
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btAuthorSearch = new System.Windows.Forms.Button();
-            this.infosys202324DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.carReportTableTableAdapter = new CarReportSystem.infosys202324DataSetTableAdapters.CarReportTableTableAdapter();
-            this.tableAdapterManager = new CarReportSystem.infosys202324DataSetTableAdapters.TableAdapterManager();
+            this.dtpDateSearch2 = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.makerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.carnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reportDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.carImageDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dtpDateSearch2 = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
+            this.carReportTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.infosys202324DataSet = new CarReportSystem.infosys202324DataSet();
+            this.infosys202324DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.carReportTableTableAdapter = new CarReportSystem.infosys202324DataSetTableAdapters.CarReportTableTableAdapter();
+            this.tableAdapterManager = new CarReportSystem.infosys202324DataSetTableAdapters.TableAdapterManager();
             this.gbMaker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).BeginInit();
             this.menuItems.SuspendLayout();
             this.statusDisp.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -314,16 +314,6 @@ namespace CarReportSystem {
             this.dgvCarReports.Size = new System.Drawing.Size(603, 165);
             this.dgvCarReports.TabIndex = 10;
             this.dgvCarReports.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCarReports_CellContentClick);
-            // 
-            // carReportTableBindingSource
-            // 
-            this.carReportTableBindingSource.DataMember = "CarReportTable";
-            this.carReportTableBindingSource.DataSource = this.infosys202324DataSet;
-            // 
-            // infosys202324DataSet
-            // 
-            this.infosys202324DataSet.DataSetName = "infosys202324DataSet";
-            this.infosys202324DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label6
             // 
@@ -650,20 +640,21 @@ namespace CarReportSystem {
             this.btAuthorSearch.UseVisualStyleBackColor = true;
             this.btAuthorSearch.Click += new System.EventHandler(this.btAuthorSearch_Click);
             // 
-            // infosys202324DataSetBindingSource
+            // dtpDateSearch2
             // 
-            this.infosys202324DataSetBindingSource.DataSource = this.infosys202324DataSet;
-            this.infosys202324DataSetBindingSource.Position = 0;
+            this.dtpDateSearch2.Location = new System.Drawing.Point(71, 39);
+            this.dtpDateSearch2.Name = "dtpDateSearch2";
+            this.dtpDateSearch2.Size = new System.Drawing.Size(175, 19);
+            this.dtpDateSearch2.TabIndex = 29;
             // 
-            // carReportTableTableAdapter
+            // label12
             // 
-            this.carReportTableTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.CarReportTableTableAdapter = this.carReportTableTableAdapter;
-            this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202324DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(48, 44);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "～";
             // 
             // dateDataGridViewTextBoxColumn
             // 
@@ -707,21 +698,30 @@ namespace CarReportSystem {
             this.carImageDataGridViewImageColumn.Name = "carImageDataGridViewImageColumn";
             this.carImageDataGridViewImageColumn.ReadOnly = true;
             // 
-            // dtpDateSearch2
+            // carReportTableBindingSource
             // 
-            this.dtpDateSearch2.Location = new System.Drawing.Point(71, 39);
-            this.dtpDateSearch2.Name = "dtpDateSearch2";
-            this.dtpDateSearch2.Size = new System.Drawing.Size(175, 19);
-            this.dtpDateSearch2.TabIndex = 29;
+            this.carReportTableBindingSource.DataMember = "CarReportTable";
+            this.carReportTableBindingSource.DataSource = this.infosys202324DataSet;
             // 
-            // label12
+            // infosys202324DataSet
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(48, 44);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 12);
-            this.label12.TabIndex = 30;
-            this.label12.Text = "～";
+            this.infosys202324DataSet.DataSetName = "infosys202324DataSet";
+            this.infosys202324DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // infosys202324DataSetBindingSource
+            // 
+            this.infosys202324DataSetBindingSource.DataSource = this.infosys202324DataSet;
+            this.infosys202324DataSetBindingSource.Position = 0;
+            // 
+            // carReportTableTableAdapter
+            // 
+            this.carReportTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CarReportTableTableAdapter = this.carReportTableTableAdapter;
+            this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202324DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // Form1
             // 
@@ -763,8 +763,6 @@ namespace CarReportSystem {
             this.gbMaker.ResumeLayout(false);
             this.gbMaker.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).EndInit();
             this.menuItems.ResumeLayout(false);
             this.menuItems.PerformLayout();
@@ -772,6 +770,8 @@ namespace CarReportSystem {
             this.statusDisp.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.infosys202324DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
