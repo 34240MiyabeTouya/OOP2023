@@ -134,7 +134,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            tsTimeDisp.Text = "";   //情報表示領域のテキストを初期化
+            tsTimeDisp.Text = "Ctrl+Cで接続";   //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString("yyyy年MM月dd日 HH時mm分ss秒");
             tsTimeDisp.BackColor = Color.Black;
             tsTimeDisp.ForeColor = Color.White;
@@ -317,7 +317,7 @@ namespace CarReportSystem {
 
         //日付で検索のイベントハンドラ
         private void btDaySearch_Click(object sender, EventArgs e) {
-            carReportTableTableAdapter.FillByDate(this.infosys202324DataSet.CarReportTable, btDaySearch.Text);
+            carReportTableTableAdapter.FillByDate(this.infosys202324DataSet.CarReportTable, dtpDateSearch.Text,dtpDateSearch2.Text);
         }
         //リセットボタンのイベントハンドラ
         private void btReset_Click(object sender, EventArgs e) {
