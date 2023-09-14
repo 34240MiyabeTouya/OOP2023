@@ -122,11 +122,21 @@ namespace SampleEntityFramework {
         }
 
         private static void Exercise1_4() {
-
+            using (var db = new BooksDbContext()) {
+                var oldbooks = db.Books.OrderBy(a => a.PublishedYear).Take(3).ToList();
+                foreach (var book in oldbooks) {
+                    Console.WriteLine($"{book.Title}:{book.Author.Name}");
+                }
+            }
         }
 
         private static void Exercise1_5() {
-
+            using (var db = new BooksDbContext()) {
+                var books = db.Authors.OrderBy(a => a.Birthday).GroupBy(a => a.Name).ToList();
+                foreach (var book in books) {
+                    Console.WriteLine($"{book.Title}:{book.Author.Name}");
+                }
+            }
         }
 
 
