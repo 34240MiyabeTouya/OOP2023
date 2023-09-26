@@ -132,9 +132,14 @@ namespace SampleEntityFramework {
 
         private static void Exercise1_5() {
             using (var db = new BooksDbContext()) {
-                var books = db.Authors.OrderBy(a => a.Birthday).GroupBy(a => a.Name).ToList();
-                foreach (var book in books) {
-                    Console.WriteLine($"{book.Title}:{book.Author.Name}");
+                var authors = db.Authors.OrderByDescending(a => a.Birthday).ToArray();
+                foreach (var author in authors) {
+                    Console.WriteLine("{0}{1:yyyy/MM}",author.Name,author.Birthday);
+                    foreach (var book in author.Books) {
+                        Console.WriteLine("{0}{1}",
+                            book.Title, book.PublishedYear, book.Author.Name, book.Author.Birthday);
+                    }
+                    Console.WriteLine();
                 }
             }
         }
