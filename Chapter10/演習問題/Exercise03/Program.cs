@@ -15,11 +15,10 @@ namespace Exercise03 {
                "We reorganized the timetable.",
             };
             foreach (var text in texts) {
-                var matches = Regex.Matches(text, @"time", RegexOptions.IgnoreCase);
-                foreach (var match in matches) {
-                    Console.WriteLine("{0}:{1}", text,);
+                var matches = Regex.Matches(text, @"time\b", RegexOptions.IgnoreCase);
+                foreach (Match match in matches) {
+                    Console.WriteLine("{0}:{1}", text,match.Index);
                 }
-                
             }
             
 
