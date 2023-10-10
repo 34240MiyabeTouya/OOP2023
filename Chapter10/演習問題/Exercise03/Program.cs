@@ -15,7 +15,7 @@ namespace Exercise03 {
                "We reorganized the timetable.",
             };
             foreach (var text in texts) {
-                var matches = Regex.Matches(text, @"time\b", RegexOptions.IgnoreCase);
+                var matches = Regex.Matches(text, @"\btime\b", RegexOptions.IgnoreCase);
                 foreach (Match match in matches) {
                     Console.WriteLine("{0}:{1}", text,match.Index);
                 }
