@@ -49,5 +49,7 @@ namespace RssReader {
             webBrowser.Navigate(ItemDatas[lbRssTitle.SelectedIndex].Link);
             //"https://news.yahoo.co.jp/rss/topics/domestic.xml"
         }
+
+        
     }
 }

@@ -66,7 +66,7 @@ namespace RssReader {
             this.webBrowser.Size = new System.Drawing.Size(868, 589);
             this.webBrowser.TabIndex = 3;
             // 
-            // wbBrowser
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,7 +75,7 @@ namespace RssReader {
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
             this.Controls.Add(this.tbUrl);
-            this.Name = "wbBrowser";
+            this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
