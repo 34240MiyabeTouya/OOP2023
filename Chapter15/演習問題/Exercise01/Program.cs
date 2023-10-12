@@ -81,6 +81,24 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_6() {
+            var quary = Library.Books.
+                                Join(Library.Categories,
+                                book => book.CategoryId,
+                                category => category.Id,
+                                (book, category) => new {
+                                    PublishedYear = book.PublishedYear,
+                                    book.Title,
+                                    CategoryaName = category.Name,
+                                })
+                                .GroupBy(x => x.CategoryaName)
+                                .OrderBy(x => x.Key);
+
+            foreach (var group in quary) {
+                Console.WriteLine("#{0}",group.Key);
+                foreach (var item in group) {
+                    Console.WriteLine("{0}", item.Title);
+                }
+            }
 
         }
 
