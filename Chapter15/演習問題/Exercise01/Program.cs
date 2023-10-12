@@ -26,12 +26,19 @@ namespace Exercise01 {
 
         private static void Exercise1_2() {
             var price = Library.Books.Max(b => b.Price);
-            var books = Library.Books.First(c => c.Price == price);
-            Console.WriteLine(books);
+            var books = Library.Books.Where(c => c.Price == price);
+            foreach (var item in books) {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise1_3() {
-
+            var year = Library.Books.GroupBy(b => b.PublishedYear)
+                                    .Select(g=>new { PublishedYear = g.Key,Count = g.Count() })
+                                    .OrderBy(x =>x.PublishedYear);
+            foreach (var books in year) {
+                Console.WriteLine("{0}年 {1}冊",books.PublishedYear,books.Count);
+            }
         }
 
         private static void Exercise1_4() {
