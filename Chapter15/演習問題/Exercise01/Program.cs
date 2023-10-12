@@ -42,10 +42,41 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4() {
-
+            var quary = Library.Books.
+                                Join(Library.Categories,
+                                book => book.CategoryId,
+                                category => category.Id,
+                                (book, category) => new { 
+                                    PublishedYear = book.PublishedYear,
+                                    book.Price,
+                                    book.Title,
+                                    CategoryaName = category.Name,
+                                })
+                                .OrderByDescending(x=>x.PublishedYear)
+                                .ThenByDescending(x=>x.Price)
+                                ;
+            foreach (var item in quary) {
+                Console.WriteLine("{0}年{1}円{2}({3})",
+                                    item.PublishedYear,
+                                    item.Price,
+                                    item.Title,
+                                    item.CategoryaName
+                                    );
+            }
         }
 
         private static void Exercise1_5() {
+            var names = Library.Books
+                               .Where(b => b.PublishedYear == 2016)
+                               .Join(Library.Categories,
+                                     book => book.CategoryId,
+                                     category => category.Id,
+                                     (book, category) => category.Name)
+                               .Distinct();
+
+            foreach (var name in names) {
+                Console.WriteLine(name);
+            }
 
         }
 
