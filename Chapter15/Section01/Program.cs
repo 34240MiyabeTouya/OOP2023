@@ -55,8 +55,6 @@ namespace Section01 {
                 Console.WriteLine($"{book.PublishedYear}年 {book.Title} ({book.Price})");
             }
         }
-
-
         //List 15-10
         public static void ToLookupSample() {
             var lookup = Library.Books
