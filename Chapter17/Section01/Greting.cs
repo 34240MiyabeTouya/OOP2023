@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Section01 {
-    class GretingMorning :Greetingbase{
-        public string GetMessage() {
+    class GretingMorning : IGreeting {
+        public  string GetMessage() {
             return "おはよう";
         }
     }
 
-    class GreetingAfternoon :Greetingbase{
-        public string GetMessage() {
+    class GreetingAfternoon : IGreeting {
+        public  string GetMessage() {
             return "こんにちは";
         }
     }
 
-    class GreetingEvening :Greetingbase{
-        public string GetMessage() {
+    class GreetingEvening : IGreeting {
+        public  string GetMessage() {
             return "こんばんは";
         }
     }
