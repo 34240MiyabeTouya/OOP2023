@@ -28,6 +28,20 @@ namespace RssReader {
             this.btGet = new System.Windows.Forms.Button();
             this.lbRssTitle = new System.Windows.Forms.ListBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.rb主要 = new System.Windows.Forms.RadioButton();
+            this.rb国内 = new System.Windows.Forms.RadioButton();
+            this.rb経済 = new System.Windows.Forms.RadioButton();
+            this.rbIT = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btRegistration = new System.Windows.Forms.Button();
+            this.cbRegistration = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbUrlRegistration = new System.Windows.Forms.TextBox();
+            this.tbNameRegistration = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.statusDisp = new System.Windows.Forms.StatusStrip();
             this.SuspendLayout();
             // 
             // tbUrl
@@ -54,7 +68,7 @@ namespace RssReader {
             this.lbRssTitle.ItemHeight = 12;
             this.lbRssTitle.Location = new System.Drawing.Point(27, 49);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(295, 616);
+            this.lbRssTitle.Size = new System.Drawing.Size(295, 196);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.SelectedIndexChanged += new System.EventHandler(this.lbRssTitle_SelectedIndexChanged);
             // 
@@ -66,11 +80,159 @@ namespace RssReader {
             this.webBrowser.Size = new System.Drawing.Size(868, 589);
             this.webBrowser.TabIndex = 3;
             // 
+            // rb主要
+            // 
+            this.rb主要.AutoSize = true;
+            this.rb主要.Location = new System.Drawing.Point(12, 267);
+            this.rb主要.Name = "rb主要";
+            this.rb主要.Size = new System.Drawing.Size(81, 16);
+            this.rb主要.TabIndex = 4;
+            this.rb主要.TabStop = true;
+            this.rb主要.Text = "Yahoo!主要";
+            this.rb主要.UseVisualStyleBackColor = true;
+            this.rb主要.CheckedChanged += new System.EventHandler(this.rb主要_CheckedChanged_1);
+            // 
+            // rb国内
+            // 
+            this.rb国内.AutoSize = true;
+            this.rb国内.Location = new System.Drawing.Point(12, 289);
+            this.rb国内.Name = "rb国内";
+            this.rb国内.Size = new System.Drawing.Size(81, 16);
+            this.rb国内.TabIndex = 5;
+            this.rb国内.TabStop = true;
+            this.rb国内.Text = "Yahoo!国内";
+            this.rb国内.UseVisualStyleBackColor = true;
+            this.rb国内.CheckedChanged += new System.EventHandler(this.rb国内_CheckedChanged_1);
+            // 
+            // rb経済
+            // 
+            this.rb経済.AutoSize = true;
+            this.rb経済.Location = new System.Drawing.Point(12, 311);
+            this.rb経済.Name = "rb経済";
+            this.rb経済.Size = new System.Drawing.Size(81, 16);
+            this.rb経済.TabIndex = 6;
+            this.rb経済.TabStop = true;
+            this.rb経済.Text = "Yahoo!経済";
+            this.rb経済.UseVisualStyleBackColor = true;
+            this.rb経済.CheckedChanged += new System.EventHandler(this.rb経済_CheckedChanged_1);
+            // 
+            // rbIT
+            // 
+            this.rbIT.AutoSize = true;
+            this.rbIT.Location = new System.Drawing.Point(12, 333);
+            this.rbIT.Name = "rbIT";
+            this.rbIT.Size = new System.Drawing.Size(67, 16);
+            this.rbIT.TabIndex = 7;
+            this.rbIT.TabStop = true;
+            this.rbIT.Text = "Yahoo!IT";
+            this.rbIT.UseVisualStyleBackColor = true;
+            this.rbIT.CheckedChanged += new System.EventHandler(this.rbIT_CheckedChanged_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 248);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 12);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "お気に入り";
+            // 
+            // btRegistration
+            // 
+            this.btRegistration.Location = new System.Drawing.Point(247, 607);
+            this.btRegistration.Name = "btRegistration";
+            this.btRegistration.Size = new System.Drawing.Size(75, 31);
+            this.btRegistration.TabIndex = 9;
+            this.btRegistration.Text = "登録";
+            this.btRegistration.UseVisualStyleBackColor = true;
+            this.btRegistration.Click += new System.EventHandler(this.btRegistration_Click);
+            // 
+            // cbRegistration
+            // 
+            this.cbRegistration.FormattingEnabled = true;
+            this.cbRegistration.Location = new System.Drawing.Point(27, 377);
+            this.cbRegistration.Name = "cbRegistration";
+            this.cbRegistration.Size = new System.Drawing.Size(295, 20);
+            this.cbRegistration.TabIndex = 11;
+            this.cbRegistration.SelectedIndexChanged += new System.EventHandler(this.cbRegistration_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 459);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "お気に入り登録";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(30, 362);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(36, 12);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "その他";
+            // 
+            // tbUrlRegistration
+            // 
+            this.tbUrlRegistration.Location = new System.Drawing.Point(26, 501);
+            this.tbUrlRegistration.Name = "tbUrlRegistration";
+            this.tbUrlRegistration.Size = new System.Drawing.Size(296, 19);
+            this.tbUrlRegistration.TabIndex = 14;
+            // 
+            // tbNameRegistration
+            // 
+            this.tbNameRegistration.Location = new System.Drawing.Point(26, 560);
+            this.tbNameRegistration.Name = "tbNameRegistration";
+            this.tbNameRegistration.Size = new System.Drawing.Size(296, 19);
+            this.tbNameRegistration.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 545);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "登録名";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 486);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(27, 12);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "URL";
+            // 
+            // statusDisp
+            // 
+            this.statusDisp.Location = new System.Drawing.Point(0, 669);
+            this.statusDisp.Name = "statusDisp";
+            this.statusDisp.Size = new System.Drawing.Size(1198, 22);
+            this.statusDisp.TabIndex = 18;
+            this.statusDisp.Text = "statusStrip1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 691);
+            this.Controls.Add(this.statusDisp);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tbNameRegistration);
+            this.Controls.Add(this.tbUrlRegistration);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cbRegistration);
+            this.Controls.Add(this.btRegistration);
+            this.Controls.Add(this.rbIT);
+            this.Controls.Add(this.rb国内);
+            this.Controls.Add(this.rb経済);
+            this.Controls.Add(this.rb主要);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
@@ -88,6 +250,20 @@ namespace RssReader {
         private System.Windows.Forms.Button btGet;
         private System.Windows.Forms.ListBox lbRssTitle;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.RadioButton rb主要;
+        private System.Windows.Forms.RadioButton rb国内;
+        private System.Windows.Forms.RadioButton rb経済;
+        private System.Windows.Forms.RadioButton rbIT;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btRegistration;
+        private System.Windows.Forms.ComboBox cbRegistration;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbUrlRegistration;
+        private System.Windows.Forms.TextBox tbNameRegistration;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.StatusStrip statusDisp;
     }
 }
 

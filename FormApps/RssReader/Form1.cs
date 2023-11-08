@@ -47,7 +47,51 @@ namespace RssReader {
                 return;
 
             webBrowser.Navigate(ItemDatas[lbRssTitle.SelectedIndex].Link);
-            //"https://news.yahoo.co.jp/rss/topics/domestic.xml"
+        }
+
+        private void rb主要_CheckedChanged_1(object sender, EventArgs e) {
+            tbUrl.Text = @"https://news.yahoo.co.jp/rss/topics/top-picks.xml";
+
+        }
+
+        private void rb国内_CheckedChanged_1(object sender, EventArgs e) {
+            tbUrl.Text = @"https://news.yahoo.co.jp/rss/topics/domestic.xml";
+
+        }
+
+        private void rb経済_CheckedChanged_1(object sender, EventArgs e) {
+            tbUrl.Text = @"https://news.yahoo.co.jp/rss/topics/business.xml";
+
+        }
+
+        private void rbIT_CheckedChanged_1(object sender, EventArgs e) {
+            tbUrl.Text = @"https://news.yahoo.co.jp/rss/topics/it.xml";
+
+        }
+
+        //登録ボタンのイベントハンドラ
+        private void btRegistration_Click(object sender, EventArgs e) {
+            if (tbUrlRegistration.Text.Equals("")) {
+                statusDisp
+                    //("登録するURlを入力してください。");
+            }
+            if (tbNameRegistration.Text.Equals("")) {
+                Console.WriteLine("登録するURLの名前を入力してください。");
+            }
+            setcbRegistration(tbUrlRegistration.Text);
+        }
+
+        //コンボボックス登録処理
+        private void setcbRegistration(string url) {
+            if (!cbRegistration.Items.Contains(url)) {
+                cbRegistration.Items.Add(url);
+            }
+        }
+        
+        //コンボボックスのURLを取得
+        private void cbRegistration_SelectedIndexChanged(object sender, EventArgs e) {
+            tbUrl.Text = cbRegistration.Text;
+            tbUrl.Refresh();//更新処理
         }
 
         

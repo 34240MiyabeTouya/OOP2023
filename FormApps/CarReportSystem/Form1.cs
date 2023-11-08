@@ -276,9 +276,5 @@ namespace CarReportSystem {
                 }
             }
         }
-
-        private void pbCarImage_Click(object sender, EventArgs e) {
-
-        }
-    }
+    }    
 }
