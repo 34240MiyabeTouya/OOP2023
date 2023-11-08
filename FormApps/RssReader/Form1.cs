@@ -93,7 +93,5 @@ namespace RssReader {
             tbUrl.Text = cbRegistration.Text;
             tbUrl.Refresh();//更新処理
         }
-
-        
     }
 }
