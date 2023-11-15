@@ -43,16 +43,16 @@ namespace SampleUnitConverter {
         }
 
         //上のComboBoxで選択されている値（単位）
-        //public MetricUnit CurrentMetricUnit { get; set; }
-        public GramsUnit CurrentGramsUnit { get; set; }
+        public MetricUnit CurrentMetricUnit { get; set; }//メートル
+        public GramsUnit CurrentGramsUnit { get; set; }//グラム
         //下のComboBoxで選択されている値（単位）
-        //public ImperialUnit CurrentImperialUnit { get; set; }
-        public PoundUnit CurrentPoundUnit { get; set; }
+        public ImperialUnit CurrentImperialUnit { get; set; }//ヤード
+        public PoundUnit CurrentPoundUnit { get; set; }//ポンド
         //▲ボタンで呼ばれるコマンド
-        //public ICommand ImperialUnitToMetric { get; private set; }
+        public ICommand ImperialUnitToMetric { get; private set; }
         public ICommand PoundUnitToGrams { get; set; }
         //▼ボタンで呼ばれるコマンド
-        //public ICommand MetricToImperialUnit { get; private set; }
+        public ICommand MetricToImperialUnit { get; private set; }
         public ICommand GramsUnitToPound { get; set; }
 
         //コンストラクタ

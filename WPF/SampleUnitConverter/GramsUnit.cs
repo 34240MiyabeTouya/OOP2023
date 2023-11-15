@@ -11,6 +11,7 @@ namespace SampleUnitConverter {
             new GramsUnit{Name = "g",Coefficient = 1,},
             new GramsUnit{Name = "kg",Coefficient = 1000,},
         };
+
         public static ICollection<GramsUnit> Units { get { return units; } }
 
         /// <summary>

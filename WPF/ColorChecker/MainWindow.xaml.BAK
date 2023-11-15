@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +19,6 @@ namespace ColorChecker {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
-        MyColor originalColor;
         public MainWindow() {
             InitializeComponent();
 
@@ -38,12 +36,7 @@ namespace ColorChecker {
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            originalColor = new MyColor {
-                Color = Color.FromRgb(byte.Parse(rValue.Text), byte.Parse(gValue.Text), byte.Parse(bValue.Text)),
-                Name = "",
-            };
-            colorArea.Background = new SolidColorBrush(Color.FromRgb(originalColor.Color.R, originalColor.Color.G, originalColor.Color.B));
-            //setColor();
+            setColor();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -59,43 +52,20 @@ namespace ColorChecker {
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            originalColor = (MyColor)((ComboBox)sender).SelectedItem;
-            double r = 0;
-            double g = 0;
-            double b = 0;
-            r = originalColor.Color.R;
-            g = originalColor.Color.G;
-            b = originalColor.Color.B;
-            rSlider.Value = r;
-            gSlider.Value = g;
-            bSlider.Value = b;
-            setColor();
+            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
+            //var color = mycolor.Color;
+            //var name = mycolor.Name;
+
+            rSlider.Value = mycolor.Color.R;
+            gSlider.Value = mycolor.Color.G;
+            bSlider.Value = mycolor.Color.B;
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
 
-            var name = GetColorList().Where(c => c.Color.R == originalColor.Color.R
-                                    && c.Color.G == originalColor.Color.G
-                                    && c.Color.B == originalColor.Color.B)
-                          .FirstOrDefault()?.Name;
-            stockList.Items.Insert(0, name == "" || name == null ? originalColor.ToString() : name);
-
         }
 
-        private void stockList_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            object[] vs = new object[3];
-            int i = 0;
-            //ストックしてある色をダブルクリックして取得
-            var data = stockList.Items[stockList.SelectedIndex];
-            var matches = Regex.Matches((string)data, @"\d+");
-            foreach (object match in matches) {
-                vs[i] = match;
-                i++;
-            }
-            rValue.Text = vs[0].ToString();
-            gValue.Text = vs[1].ToString();
-            bValue.Text = vs[2].ToString();
-        }
+        
     }
 
     /// <summary>
@@ -104,8 +74,5 @@ namespace ColorChecker {
     public class MyColor {
         public Color Color { get; set; }
         public string Name { get; set; }
-        public override string ToString() {
-            return "R : " + Color.R + "   G : " + Color.G + "   B : " + Color.B;
-        }
     }
 }

@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace ColorChecker.Properties {
+namespace CollarChecker.Properties {
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
@@ -40,7 +40,7 @@ namespace ColorChecker.Properties {
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ColorChecker.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CollarChecker.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
