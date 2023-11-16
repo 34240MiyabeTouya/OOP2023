@@ -47,10 +47,10 @@ namespace RssReader {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.開くtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.保存StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.終了toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.保存StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.終了toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdRssDialog = new System.Windows.Forms.SaveFileDialog();
             this.statusDisp.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -267,12 +267,23 @@ namespace RssReader {
             this.開くtoolStripMenuItem.Text = "開く(&O)...";
             this.開くtoolStripMenuItem.Click += new System.EventHandler(this.開くtoolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
             // 保存StripMenuItem
             // 
             this.保存StripMenuItem.Name = "保存StripMenuItem";
             this.保存StripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.保存StripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存StripMenuItem.Text = "保存(&S)...";
+            this.保存StripMenuItem.Click += new System.EventHandler(this.保存StripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // 終了toolStripMenuItem
             // 
@@ -280,16 +291,6 @@ namespace RssReader {
             this.終了toolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.終了toolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.終了toolStripMenuItem.Text = "終了(&X)";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // Form1
             // 

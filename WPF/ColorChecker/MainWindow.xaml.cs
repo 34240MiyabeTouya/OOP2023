@@ -27,7 +27,9 @@ namespace ColorChecker {
             DataContext = GetColorList();
 
         }
-
+        double r = 0;
+        double g = 0;
+        double b = 0;
         /// <summary>
         /// すべての色を取得するメソッド
         /// </summary>
@@ -43,7 +45,7 @@ namespace ColorChecker {
                 Name = "",
             };
             colorArea.Background = new SolidColorBrush(Color.FromRgb(originalColor.Color.R, originalColor.Color.G, originalColor.Color.B));
-            //setColor();
+            setColor();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -60,12 +62,9 @@ namespace ColorChecker {
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             originalColor = (MyColor)((ComboBox)sender).SelectedItem;
-            double r = 0;
-            double g = 0;
-            double b = 0;
-            r = originalColor.Color.R;
-            g = originalColor.Color.G;
-            b = originalColor.Color.B;
+            this.r = originalColor.Color.R;
+            this.g = originalColor.Color.G;
+            this.b = originalColor.Color.B;
             rSlider.Value = r;
             gSlider.Value = g;
             bSlider.Value = b;
@@ -73,13 +72,14 @@ namespace ColorChecker {
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
+            this.r = originalColor.Color.R;
+            this.g = originalColor.Color.G;
 
-            var name = GetColorList().Where(c => c.Color.R == originalColor.Color.R
-                                    && c.Color.G == originalColor.Color.G
-                                    && c.Color.B == originalColor.Color.B)
+            var name = GetColorList().Where(c => c.Color.R == this.r
+                                    && c.Color.G == this.g
+                                    && c.Color.B == this.b)
                           .FirstOrDefault()?.Name;
             stockList.Items.Insert(0, name == "" || name == null ? originalColor.ToString() : name);
-
         }
 
         private void stockList_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -88,24 +88,34 @@ namespace ColorChecker {
             //ストックしてある色をダブルクリックして取得
             var data = stockList.Items[stockList.SelectedIndex];
             var matches = Regex.Matches((string)data, @"\d+");
-            foreach (object match in matches) {
-                vs[i] = match;
-                i++;
-            }
-            rValue.Text = vs[0].ToString();
-            gValue.Text = vs[1].ToString();
-            bValue.Text = vs[2].ToString();
-        }
-    }
+            if (matches != null) {
+                foreach (object match in matches) {
+                    vs[i] = match;
+                    i++;
+                }
+            } else {
+                var color = GetColorList().Where(c => c.Name.Equals(data)).FirstOrDefault();
+                //var matche = Regex.Matches((string)color, @"\d+");
+                //foreach (object match in matche) {
+                //    vs[i] = match;
+                //    i++;
+                //}
 
-    /// <summary>
-    /// 色と色名を保持するクラス
-    /// </summary>
-    public class MyColor {
-        public Color Color { get; set; }
-        public string Name { get; set; }
-        public override string ToString() {
-            return "R : " + Color.R + "   G : " + Color.G + "   B : " + Color.B;
+                rValue.Text = vs[0].ToString();
+                gValue.Text = vs[1].ToString();
+                bValue.Text = vs[2].ToString();
+            }
+        }
+
+        /// <summary>
+        /// 色と色名を保持するクラス
+        /// </summary>
+        public class MyColor {
+            public Color Color { get; set; }
+            public string Name { get; set; }
+            public override string ToString() {
+                return "R : " + Color.R + "   G : " + Color.G + "   B : " + Color.B;
+            }
         }
     }
 }

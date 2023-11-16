@@ -66,7 +66,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="stockButton" Grid.Row="0"  Content="STOCK" FontSize="20" Margin="10,5" Click="stockButton_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" MouseDoubleClick="stockList_MouseDoubleClick"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" MouseDoubleClick="stockList_MouseDoubleClick" />
         </Grid>
     </Grid>
 </Window>

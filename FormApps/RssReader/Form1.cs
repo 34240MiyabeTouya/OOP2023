@@ -124,7 +124,7 @@ namespace RssReader {
                 try {
                     //バイナリ形式でシリアル化
                     var bf = new BinaryFormatter();
-                    using (System.IO.FileStream fs = File.Open(sfdRssDialog.FileName, FileMode.Create)) {
+                    using (FileStream fs = File.Open(sfdRssDialog.FileName, FileMode.Create)) {
                         bf.Serialize(fs, UrlDate);
                     }
                 } catch (Exception ex) {
@@ -139,6 +139,7 @@ namespace RssReader {
                     //逆シリアル化でバイナリ形式を取り込む
                     var bf = new BinaryFormatter();
                     using (FileStream fs = File.Open(sfdRssDialog.FileName, FileMode.Open, FileAccess.Read)) {
+
 
 
                     }
